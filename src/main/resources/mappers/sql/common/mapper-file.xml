@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.egov.template.services.common.file.mapper.FileMapper">
+
+    <select id="selectFileGrp" parameterType="com.egov.template.services.common.file.vo.TbCmFileGroupVO" resultType="com.egov.template.services.common.file.vo.TbCmFileGroupVO">
+        SELECT FILE_GROUP_ID
+             , FILE_ACS_AUTHRT_CD
+             , FILE_MDFCN_AUTHRT_CD
+             , BFR_FILE_GROUP_ID
+             , USE_YN
+             , REG_DT
+             , RGTR_ID
+             , MDFCN_DT
+             , MDFR_ID
+        FROM OPER.TB_CM_FILE_GROUP
+        WHERE FILE_GROUP_ID = #{fileGroupId}
+        <if test="fileAcsAuthrtCd != null and fileAcsAuthrtCd != ''">
+            AND FILE_ACS_AUTHRT_CD = #{fileAcsAuthrtCd}
+        </if>
+        <if test="fileMdfcnAuthrtCd != null and fileMdfcnAuthrtCd != ''">
+            AND FILE_MDFCN_AUTHRT_CD = #{fileMdfcnAuthrtCd}
+        </if>
+        <if test="bfrFileGroupId != null and bfrFileGroupId != ''">
+            AND BFR_FILE_GROUP_ID = #{bfrFileGroupId}
+        </if>
+        <choose>
+            <when test="useYn != null and useYn != ''">
+                AND USE_YN = #{useYn}
+            </when>
+            <otherwise>
+                AND USE_YN = 'Y'
+            </otherwise>
+        </choose>
+    </select>
+
+    <select id="selectFileDtl" parameterType="com.egov.template.services.common.file.vo.TbCmFileDtlVO" resultType="com.egov.template.services.common.file.vo.TbCmFileDtlVO">
+        SELECT FILE_GROUP_ID
+             , FILE_ID
+             , FILE_PATH_NM
+             , STRG_FILE_NM
+             , ORGNL_FILE_NM
+             , FILE_SZ
+             , FILE_EXTN_NM
+             , USE_YN
+             , REG_DT
+             , RGTR_ID
+             , MDFCN_DT
+             , MDFR_ID
+        FROM OPER.TB_CM_FILE_DTL
+        WHERE FILE_GROUP_ID = #{fileGroupId}
+        AND FILE_ID = #{fileId}
+        <if test="filePathNm != null and filePathNm != ''">
+            AND FILE_PATH_NM LIKE CONCAT('%',#{filePathNm},'%')
+        </if>
+        <if test="strgFileNm != null and strgFileNm != ''">
+            AND STRG_FILE_NM LIKE CONCAT('%',#{strgFileNm},'%')
+        </if>
+        <if test="orgnlFileNm != null and orgnlFileNm != ''">
+            AND ORGNL_FILE_NM LIKE CONCAT('%',#{orgnlFileNm},'%')
+        </if>
+        <choose>
+            <when test="useYn != null and useYn != ''">
+                AND USE_YN = #{useYn}
+            </when>
+            <otherwise>
+                AND USE_YN = 'Y'
+            </otherwise>
+        </choose>
+    </select>
+
+    <select id="selectFileDtlList" parameterType="com.egov.template.services.common.file.vo.TbCmFileDtlVO" resultType="com.egov.template.services.common.file.vo.TbCmFileDtlVO">
+        SELECT FILE_GROUP_ID
+             , FILE_ID
+             , FILE_PATH_NM
+             , STRG_FILE_NM
+             , ORGNL_FILE_NM
+             , FILE_SZ
+             , FILE_EXTN_NM
+             , USE_YN
+             , REG_DT
+             , RGTR_ID
+             , MDFCN_DT
+             , MDFR_ID
+        FROM OPER.TB_CM_FILE_DTL
+        WHERE FILE_GROUP_ID = #{fileGroupId}
+        <if test="fileId != null and fileId != ''">
+            AND FILE_ID = #{fileId}
+        </if>
+        <if test="filePathNm != null and filePathNm != ''">
+            AND FILE_PATH_NM LIKE CONCAT('%',#{filePathNm},'%')
+        </if>
+        <if test="strgFileNm != null and strgFileNm != ''">
+            AND STRG_FILE_NM LIKE CONCAT('%',#{strgFileNm},'%')
+        </if>
+        <if test="orgnlFileNm != null and orgnlFileNm != ''">
+            AND ORGNL_FILE_NM LIKE CONCAT('%',#{orgnlFileNm},'%')
+        </if>
+        <choose>
+            <when test="useYn != null and useYn != ''">
+                AND USE_YN = #{useYn}
+            </when>
+            <otherwise>
+                AND USE_YN = 'Y'
+            </otherwise>
+        </choose>
+    </select>
+
+    <insert id="insertFileGrp" parameterType="com.egov.template.services.common.file.vo.TbCmFileGroupVO">
+        INSERT INTO OPER.TB_CM_FILE_GROUP (
+            FILE_GROUP_ID
+            , FILE_ACS_AUTHRT_CD
+            , FILE_MDFCN_AUTHRT_CD
+            , BFR_FILE_GROUP_ID
+            , USE_YN
+            , REG_DT
+            , RGTR_ID
+            , MDFCN_DT
+            , MDFR_ID
+        )
+        VALUES
+        (
+            #{fileGroupId}
+            , #{fileAcsAuthrtCd}
+            , #{fileMdfcnAuthrtCd}
+            , #{bfrFileGroupId}
+            , 'Y'
+            , NOW()
+            , #{rgtrId}
+            , NULL
+            , NULL
+        )
+    </insert>
+
+    <update id="updateFileGrp" parameterType="com.egov.template.services.common.file.vo.TbCmFileGroupVO">
+        UPDATE OPER.TB_CM_FILE_GROUP
+        SET MDFCN_DT = NOW()
+          , MDFR_ID = #{mdfrId}
+            <if test="fileAcsAuthrtCd != null and fileAcsAuthrtCd != ''">
+                , FILE_ACS_AUTHRT_CD = #{fileAcsAuthrtCd}
+            </if>
+            <if test="fileMdfcnAuthrtCd != null and fileMdfcnAuthrtCd != ''">
+                , FILE_MDFCN_AUTHRT_CD = #{fileMdfcnAuthrtCd}
+            </if>
+            <if test="bfrFileGroupId != null and bfrFileGroupId != ''">
+                , BFR_FILE_GROUP_ID = #{bfrFileGroupId}
+            </if>
+            <if test="useYn != null and useYn != ''">
+                , USE_YN = #{useYn}
+            </if>
+        WHERE FILE_GROUP_ID = #{fileGroupId}
+    </update>
+
+    <insert id="insertFileDtl" parameterType="com.egov.template.services.common.file.vo.TbCmFileDtlVO">
+        INSERT INTO OPER.TB_CM_FILE_DTL (
+            FILE_GROUP_ID
+            , FILE_ID
+            , FILE_PATH_NM
+            , STRG_FILE_NM
+            , ORGNL_FILE_NM
+            , FILE_SZ
+            , FILE_EXTN_NM
+            , USE_YN
+            , REG_DT
+            , RGTR_ID
+            , MDFCN_DT
+            , MDFR_ID
+        )
+        VALUES
+        (
+            #{fileGroupId}
+            , #{fileId}
+            , #{filePathNm}
+            , #{strgFileNm}
+            , #{orgnlFileNm}
+            , #{fileSz}
+            , #{fileExtnNm}
+            , 'Y'
+            , NOW()
+            , #{rgtrId}
+            , NULL
+            , NULL
+        )
+    </insert>
+
+    <update id="updateFileDtl" parameterType="com.egov.template.services.common.file.vo.TbCmFileDtlVO">
+        UPDATE OPER.TB_CM_FILE_DTL
+        SET MDFCN_DT = NOW()
+          , MDFR_ID = #{mdfrId}
+            <if test="filePathNm != null and filePathNm != ''">
+                , FILE_PATH_NM = #{filePathNm}
+            </if>
+            <if test="strgFileNm != null and strgFileNm != ''">
+                , STRG_FILE_NM = #{strgFileNm}
+            </if>
+            <if test="orgnlFileNm != null and orgnlFileNm != ''">
+                , ORGNL_FILE_NM = #{orgnlFileNm}
+            </if>
+            <if test="fileSz != null and fileSz != ''">
+                , FILE_SZ = #{fileSz}
+            </if>
+            <if test="fileExtnNm != null and fileExtnNm != ''">
+                , FILE_EXTN_NM = #{fileExtnNm}
+            </if>
+            <if test="useYn != null and useYn != ''">
+                , USE_YN = #{useYn}
+            </if>
+        WHERE FILE_GROUP_ID = #{fileGroupId}
+        AND FILE_ID = #{fileId}
+    </update>
+
+</mapper>

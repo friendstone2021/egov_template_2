@@ -1,0 +1,61 @@
+/* GmarketSans */
+@font-face {
+  font-family: 'Gmarket Sans TTF';
+  src: url('./fonts/GmarketSans/GmarketSansTTFLight.eot');
+  src: url('./fonts/GmarketSans/GmarketSansTTFLight.eot?#iefix') format('embedded-opentype'), url('./fonts/GmarketSans/GmarketSansTTFLight.woff2') format('woff2'),
+    url('./fonts/GmarketSans/GmarketSansTTFLight.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gmarket Sans TTF';
+  src: url('./fonts/GmarketSans/GmarketSansTTFMedium.eot');
+  src: url('./fonts/GmarketSans/GmarketSansTTFMedium.eot?#iefix') format('embedded-opentype'), url('./fonts/GmarketSans/GmarketSansTTFMedium.woff2') format('woff2'),
+    url('./fonts/GmarketSans/GmarketSansTTFMedium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gmarket Sans TTF';
+  src: url('./fonts/GmarketSans/GmarketSansTTFBold.eot');
+  src: url('./fonts/GmarketSans/GmarketSansTTFBold.eot?#iefix') format('embedded-opentype'), url('./fonts/GmarketSans/GmarketSansTTFBold.woff2') format('woff2'),
+    url('./fonts/GmarketSans/GmarketSansTTFBold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* KoPupDotum */
+@font-face {
+  font-family: 'KoPubDotum';
+  src: url('./fonts/KoPubDotum/KoPubDotumLight.eot');
+  src: url('./fonts/KoPubDotum/KoPubDotumLight.eot?#iefix') format('embedded-opentype'), url('./fonts/KoPubDotum/KoPubDotumLight.woff2') format('woff2'),
+    url('./fonts/KoPubDotum/KoPubDotumLight.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'KoPubDotum';
+  src: url('./fonts/KoPubDotum/KoPubDotumMedium.eot');
+  src: url('./fonts/KoPubDotum/KoPubDotumMedium.eot?#iefix') format('embedded-opentype'), url('./fonts/KoPubDotum/KoPubDotumMedium.woff2') format('woff2'),
+    url('./fonts/KoPubDotum/KoPubDotumMedium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'KoPubDotum';
+  src: url('./fonts/KoPubDotum/KoPubDotumBold.eot');
+  src: url('./fonts/KoPubDotum/KoPubDotumBold.eot?#iefix') format('embedded-opentype'), url('./fonts/KoPubDotum/KoPubDotumBold.woff2') format('woff2'),
+    url('./fonts/KoPubDotum/KoPubDotumBold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}

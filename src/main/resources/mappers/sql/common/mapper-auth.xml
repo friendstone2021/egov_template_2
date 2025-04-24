@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.egov.template.services.common.auth.mapper.AuthMapper">
+
+    <!-- CREATE: 권한 정보 등록 -->
+    <insert id="insertAuth" parameterType="com.egov.template.services.common.auth.vo.TbCmAuthrtVO">
+        INSERT INTO OPER.TB_CM_AUTHRT (AUTHRT_CD,
+                                AUTHRT_NM,
+                                USE_YN,
+                                REG_DT,
+                                RGTR_ID)
+        VALUES (#{authrtCd},
+                #{authrtNm},
+                #{useYn},
+                #{regDt},
+                #{rgtrId})
+    </insert>
+
+    <!-- READ: 권한 목록 조회 -->
+    <select id="selectAuthList" parameterType="com.egov.template.services.common.auth.vo.TbCmAuthrtVO"
+            resultType="com.egov.template.services.common.auth.vo.TbCmAuthrtVO">
+        SELECT
+        AUTHRT_CD,
+        AUTHRT_NM,
+        USE_YN,
+        REG_DT,
+        RGTR_ID,
+        MDFCN_DT,
+        MDFR_ID
+        FROM OPER.TB_CM_AUTHRT
+        <where>
+            <if test="authrtCd != null and authrtCd != ''">
+                AND AUTHRT_CD = #{authrtCd}
+            </if>
+            <if test="authrtNm != null and authrtNm != ''">
+                AND AUTHRT_NM LIKE CONCAT('%', #{authrtNm}, '%')
+            </if>
+            <if test="useYn != null and useYn != ''">
+                AND USE_YN = #{useYn}
+            </if>
+        </where>
+        ORDER BY AUTHRT_CD
+    </select>
+
+    <!-- READ: 권한 상세 조회 -->
+    <select id="selectAuth" parameterType="string" resultType="com.egov.template.services.common.auth.vo.TbCmAuthrtVO">
+        SELECT AUTHRT_CD,
+               AUTHRT_NM,
+               USE_YN,
+               REG_DT,
+               RGTR_ID,
+               MDFCN_DT,
+               MDFR_ID
+        FROM OPER.TB_CM_AUTHRT
+        WHERE AUTHRT_CD = #{authrtCd}
+    </select>
+
+    <!-- UPDATE: 권한 정보 수정 (파라미터가 존재할 경우만 업데이트) -->
+    <update id="updateAuth" parameterType="com.egov.template.services.common.auth.vo.TbCmAuthrtVO">
+        UPDATE OPER.TB_CM_AUTHRT
+        <set>
+            <if test="authrtNm != null">AUTHRT_NM = #{authrtNm},</if>
+            <if test="useYn != null">USE_YN = #{useYn},</if>
+            <if test="mdfcnDt != null">MDFCN_DT = #{mdfcnDt},</if>
+            <if test="mdfrId != null">MDFR_ID = #{mdfrId},</if>
+        </set>
+        WHERE AUTHRT_CD = #{authrtCd}
+    </update>
+
+    <!-- DELETE: 권한 정보 삭제 -->
+    <delete id="deleteAuth" parameterType="string">
+        DELETE
+        FROM OPER.TB_CM_AUTHRT
+        WHERE AUTHRT_CD = #{authrtCd}
+    </delete>
+
+    <!-- 논리적 삭제: 사용 여부만 변경 -->
+    <update id="deactivateAuth" parameterType="map">
+        UPDATE OPER.TB_CM_AUTHRT
+        SET USE_YN   = 'N',
+            MDFCN_DT = NOW(),
+            MDFR_ID  = #{mdfrId}
+        WHERE AUTHRT_CD = #{authrtCd}
+    </update>
+
+    <!-- 권한 존재 여부 확인 -->
+    <select id="countAuth" parameterType="string" resultType="int">
+        SELECT COUNT(*)
+        FROM OPER.TB_CM_AUTHRT
+        WHERE AUTHRT_CD = #{authrtCd}
+    </select>
+
+    <!-- 권한 코드 중복 확인 -->
+    <select id="checkAuthrtCdDuplicate" parameterType="string" resultType="int">
+        SELECT COUNT(*)
+        FROM OPER.TB_CM_AUTHRT
+        WHERE AUTHRT_CD = #{authrtCd}
+    </select>
+
+    <select id="selectUserAuthList" parameterType="string" resultType="string">
+        SELECT AUTHRT_CD
+        FROM OPER.tb_cm_user_authrt
+        WHERE USER_ID = #{userId}
+    </select>
+
+    <insert id="insertUserAuth" parameterType="com.egov.template.services.common.auth.vo.TbCmUserAuthrtVO">
+        INSERT INTO OPER.tb_cm_user_authrt
+            (USER_ID, AUTHRT_CD, USE_YN, REG_DT, RGTR_ID)
+        VALUES (#{userId}, #{authrtCd}, #{useYn}, #{regDt}, #{rgtrId})
+    </insert>
+</mapper>

@@ -1,0 +1,963 @@
+/* checkbox radio : 블럭 체크박스, 블럭 라디오버튼 */
+/* 라디오버튼 */
+.radio-wrap {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2rem 3rem;
+}
+
+.radio-wrap span {
+  position: relative;
+  display: flex;
+}
+
+.radio-wrap .put-radio {
+  position: absolute;
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  clip: rect(0 0 0 0);
+}
+
+.radio-wrap .put-radio + .radio-label {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 9px;
+  font-size: 1.5rem;
+  font-weight: 400;
+  letter-spacing: -0.45px;
+  line-height: 3.2rem;
+  color: #000;
+  cursor: pointer;
+}
+
+.radio-wrap .put-radio + .radio-label::before {
+  content: '';
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  border: 4px solid #fff;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 0 1px #c2cdd3;
+  box-sizing: border-box;
+}
+
+.radio-wrap .put-radio:focus + .radio-label::before {
+  box-shadow: 0 0 0 2px #3f72dc;
+}
+
+.radio-wrap .put-radio:checked + .radio-label::before {
+  background: #3f72dc;
+}
+
+/* 체크박스 */
+.check-wrap {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 3rem;
+  padding: 6px 0;
+}
+
+.check-wrap .put-check {
+  position: absolute;
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  clip: rect(0 0 0 0);
+}
+
+.check-wrap .put-check + .check-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 1.6rem;
+  font-weight: 400;
+  letter-spacing: -0.48px;
+  color: #000;
+  cursor: pointer;
+}
+
+.check-wrap .put-check + .check-label::before {
+  content: '';
+  display: inline-block;
+  width: 2.4rem;
+  height: 2.4rem;
+  border: 1px solid #959c9e;
+  border-radius: 4px;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+.check-wrap .put-check:focus + .check-label::before {
+  border-color: #2db87e;
+}
+
+.check-wrap .put-check:checked + .check-label::before {
+  border-color: #2db87e;
+  background: #effff3 url(../../images/icon/checked.png) center center no-repeat;
+  background-size: 12px 8px;
+}
+
+.check-wrap .put-check:disabled + .check-label {
+  cursor: default;
+}
+
+.check-wrap .put-check:disabled + .check-label::before {
+  border-color: #c9c9d4;
+  background: #dddedf;
+}
+
+/* textarea */
+textarea.basic {
+  display: block;
+  width: 100%;
+  height: auto;
+  /* 높이값 초기화 */
+  padding: 4px 5px;
+  border: var(--input-line);
+  /* 포커스시 발생하는 효과 제거를 원한다면 */
+  -webkit-appearance: none;
+  /* 브라우저별 기본 스타일링 제거 */
+  -moz-appearance: none;
+  appearance: none;
+  /* iSO 둥근모서리 제거 */
+  outline-style: none;
+  resize: none;
+}
+
+/* search-form */
+.search-form {
+  align-items: center;
+  flex-grow: 1;
+  overflow: hidden;
+  border: 1px solid #e2e4ed;
+  border-radius: 4px;
+  background: #eeeeee;
+}
+
+.search-form-rows {
+  padding: 0;
+}
+
+.search-form-rows .row {
+  padding: 8px 1rem 8px 3px;
+}
+
+.search-form .el-label label {
+  align-items: center;
+  padding: 0 1rem;
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: -0.28px;
+  color: #000;
+}
+
+.search-form .btn-search {
+  width: 5rem;
+  padding: 0;
+  min-width: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* checkbox && radio input */
+label.chkbox,
+label.radiobox {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: inherit;
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+  min-width: auto;
+}
+
+label.chkbox input[type='checkbox'],
+label.radiobox input[type='radio'] {
+  margin-right: 5px;
+}
+
+label.chkbox.single,
+label.radiobox.single {
+  justify-content: center;
+}
+
+label.chkbox.single input[type='checkbox'],
+label.radiobox.single input[type='radio'] {
+  margin-right: 0px;
+}
+
+label.chkbox::before,
+label.radiobox::before {
+  display: none;
+}
+
+input[type='checkbox'],
+input[type='radio'] {
+  position: relative;
+  width: 20px;
+  height: 20px;
+}
+
+input[type='checkbox']:focus,
+input[type='checkbox']:active,
+input[type='radio']:focus,
+input[type='radio']:active {
+  box-shadow: none;
+}
+
+.input-form label.chkbox,
+.input-form label.radiobox {
+  height: var(--input-height);
+  padding-left: 0;
+}
+
+/* select box -- input */
+.flex select {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+
+  /* 높이값 초기화 */
+  height: var(--input-height);
+  padding: var(--input-select-padding);
+  font-size: var(--input-fontsize);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  color: #000;
+  border: var(--input-line);
+  border-radius: var(--border-radius);
+
+  /* 네이티브 화살표 대체 */
+  background: #fff url(../../images/icon/select-arr.svg) right 5px center no-repeat;
+  background-size: 15.5px 9.5px;
+}
+
+input {
+  width: 100%;
+  -webkit-transition-property: color, border-color, background-color, box-shadow;
+  -webkit-transition-duration: 0.2s;
+  -webkit-transition-timing-function: ease-in-out;
+  transition-property: color, border-color, background-color, box-shadow;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+}
+
+input[type='text'] {
+  /* 높이값 초기화 */
+  height: var(--input-height);
+
+  padding: var(--input-padding);
+  font-size: var(--input-fontsize);
+  border: var(--input-line);
+  border-radius: var(--border-radius);
+
+  /* 브라우저별 기본 스타일링 제거 */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  /* 포커스시 발생하는 효과 제거를 원한다면 */
+  outline-style: none;
+}
+
+input[type='password'] {
+  /* 높이값 초기화 */
+  height: var(--input-height);
+
+  padding: var(--input-padding);
+  font-size: var(--input-fontsize);
+  border: var(--input-line);
+  border-radius: var(--border-radius);
+
+  /* 브라우저별 기본 스타일링 제거 */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  /* 포커스시 발생하는 효과 제거를 원한다면 */
+  outline-style: none;
+}
+
+input[type='file'] {
+  /* 높이값 초기화 */
+  height: var(--input-height);
+  padding: var(--input-padding);
+  font-size: var(--input-fontsize);
+  border: var(--input-line);
+  border-radius: var(--border-radius);
+
+  /* 포커스시 발생하는 효과 제거를 원한다면 */
+  -webkit-appearance: none;
+  /* 브라우저별 기본 스타일링 제거 */
+  -moz-appearance: none;
+  appearance: none;
+  /* iSO 둥근모서리 제거 */
+  outline-style: none;
+}
+
+input[type='number'] {
+  /* 높이값 초기화 */
+  height: var(--input-height);
+
+  padding: 0 5px 0 10px;
+  font-size: var(--input-fontsize);
+  border: var(--input-line);
+  border-radius: var(--border-radius);
+}
+
+input[type='number'].with-btn::-webkit-inner-spin-button,
+input[type='number'].with-btn::-webkit-outer-spin-button {
+  opacity: 1;
+  -webkit-appearance: auto;
+  -moz-appearance: auto;
+  appearance: auto;
+}
+
+/* input date */
+.date-wrap {
+  align-items: center;
+}
+
+input[type='date'],
+input[type='datetime-local'] {
+  /* 달력아이콘변경 */
+  position: relative;
+  /* 높이값 초기화 */
+  height: var(--input-height);
+  padding: var(--input-padding);
+  font-size: var(--input-fontsize);
+
+  border: var(--input-line);
+  border-radius: var(--border-radius);
+  background: #fff url(../../images/icon/calendar.svg) right 8px center no-repeat;
+
+  /* 브라우저별 기본 스타일링 제거 */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  /* 포커스시 발생하는 효과 제거를 원한다면 */
+  outline-style: none;
+}
+
+input[type='date']::-webkit-clear-button,
+input[type='date']::-webkit-inner-spin-button {
+  display: none;
+}
+
+input[type='date']::-webkit-calendar-picker-indicator {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  color: transparent;
+  background: transparent;
+}
+
+input[type='text']:disabled {
+  background: #eaedf0;
+}
+
+select:disabled {
+  background: #eaedf0;
+}
+
+input::placeholder {
+  color: #9c9d9e;
+}
+
+input:not(.put-color):read-only {
+  background: #fff;
+  color: #81898f;
+}
+
+.colorbtn input[type='radio'] {
+  display: none;
+}
+
+.colorbtn input[type='radio'] + span {
+  display: inline-flex;
+  overflow: hidden;
+  overflow: hidden;
+  width: 64px;
+  height: var(--input-height);
+  text-align: left;
+  text-indent: -999px;
+  color: #333;
+  border: 1px solid transparent;
+  border-radius: 30px;
+
+  background: #fff;
+  cursor: pointer;
+}
+
+.colorbtn input[type='radio'] + span.color-red {
+  background: var(--color-red);
+}
+
+.colorbtn input[type='radio'] + span {
+  box-shadow: inset 2px 2px 5px rgba(255, 255, 255, 0.8);
+}
+
+.colorbtn input[type='radio'] + span.color-orange {
+  background: var(--color-orange);
+}
+
+.colorbtn input[type='radio'] + span.color-yellow {
+  background: var(--color-yellow);
+}
+
+.colorbtn input[type='radio'] + span.color-brown {
+  background: var(--color-brown);
+}
+
+.colorbtn input[type='radio'] + span.color-blue {
+  background: var(--color-blue);
+}
+
+.colorbtn input[type='radio'] + span.color-sky {
+  background: var(--color-sky);
+}
+
+.colorbtn input[type='radio'] + span.color-navy {
+  background: var(--color-navy);
+}
+
+.colorbtn input[type='radio'] + span.color-mint {
+  background: var(--color-mint);
+}
+
+.colorbtn input[type='radio'] + span.color-green {
+  background: var(--color-green);
+}
+
+.colorbtn input[type='radio'] + span.color-purple {
+  background: var(--color-purple);
+}
+
+.colorbtn input[type='radio']:checked + span {
+  border: 1px solid #f4f6f8;
+  box-shadow: inset 4px 4px 2px rgba(19, 26, 43, 0.9);
+  filter: brightness(0.7);
+}
+
+/* put-basic */
+.put-basic:focus {
+  border-color: #0769b7;
+  outline: 1px solid #0769b7;
+}
+
+.put-basic.full {
+  flex-basis: 100%;
+  max-width: 100%;
+}
+.put-basic.size-30 {
+  max-width: 3rem;
+}
+.put-basic.size-40 {
+  max-width: 4rem;
+}
+.put-basic.size-50 {
+  max-width: 5rem;
+}
+.put-basic.size-60 {
+  max-width: 6rem;
+}
+.put-basic.size-70 {
+  max-width: 7rem;
+}
+.put-basic.size-80 {
+  max-width: 8rem;
+}
+.put-basic.size-90 {
+  max-width: 9rem;
+}
+.put-basic.size-100 {
+  max-width: 10rem;
+}
+.put-basic.size-110 {
+  max-width: 11rem;
+}
+.put-basic.size-120 {
+  max-width: 12rem;
+}
+.put-basic.size-130 {
+  max-width: 13rem;
+}
+.put-basic.size-150 {
+  max-width: 15rem;
+}
+.put-basic.size-170 {
+  max-width: 17rem;
+}
+.put-basic.size-200 {
+  max-width: 20rem;
+}
+.put-basic.size-220 {
+  max-width: 22rem;
+}
+.put-basic.size-230 {
+  max-width: 23rem;
+}
+.put-basic.size-240 {
+  max-width: 24rem;
+}
+.put-basic.size-250 {
+  max-width: 25rem;
+}
+.put-basic.size-280 {
+  max-width: 28rem;
+}
+.put-basic.size-300 {
+  max-width: 30rem;
+}
+.put-basic.size-320 {
+  max-width: 32rem;
+}
+.put-basic.size-350 {
+  max-width: 35rem;
+}
+.put-basic.size-auto {
+  width: inherit;
+  max-width: 100%;
+}
+
+.put-color {
+  width: 9rem;
+  height: 3.8rem;
+  padding: 1px 2.8rem 1px 3px;
+  border: 1px solid #959c9e;
+  border-radius: 4px;
+  background: #fff url(../../images/icon/select-arr.svg) right 5px center no-repeat;
+  background-size: 15.5px 9.5px;
+}
+
+.put-txtarea {
+  width: 100%;
+  min-height: 28rem;
+  padding: 9px;
+  font-size: var(--input-fontsize);
+  border: var(--input-line);
+  border-radius: var(--border-radius);
+
+  /* 브라우저별 기본 스타일링 제거 */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  /* 포커스시 발생하는 효과 제거를 원한다면 */
+  outline-style: none;
+}
+
+/* 검색영역 내 검색 컴퍼넌트 인라인 버튼 */
+.search-form-rows ~ .search-form-rows {
+  border-top: 1px solid #e2e5e9;
+}
+
+/* 날짜입력버튼 */
+.put-date::placeholder {
+  color: #000;
+}
+.put-btn-date {
+  position: relative;
+  flex-shrink: 0;
+  width: 3.6rem;
+  margin-left: -3px;
+  color: transparent;
+  border: 1px solid #7394d2;
+  border-radius: 4px;
+  background: #fff;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.put-btn-date::placeholder {
+  display: none;
+  -webkit-appearance: none;
+}
+.put-btn-date::-webkit-datetime-edit-fields-wrapper {
+  display: none;
+  -webkit-appearance: none;
+}
+.put-btn-date::-webkit-datetime-edit-text {
+  display: none;
+  -webkit-appearance: none;
+}
+.put-btn-date::-webkit-datetime-edit-month-field {
+  display: none;
+  -webkit-appearance: none;
+}
+.put-btn-date::-webkit-datetime-edit-day-field {
+  display: none;
+  -webkit-appearance: none;
+}
+.put-btn-date::-webkit-datetime-edit-year-field {
+  display: none;
+  -webkit-appearance: none;
+}
+.put-btn-date::-webkit-calendar-picker-indicator {
+  z-index: 1;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  cursor: pointer;
+  opacity: 0;
+}
+.put-btn-date::before {
+  content: '';
+  position: absolute;
+  width: 1.8rem;
+  height: 2rem;
+  left: 50%;
+  top: 50%;
+  color: #fff;
+  background: url(../../images/icon/calendar.png) center center no-repeat;
+  background-size: contain;
+  transition: 0.3s;
+  transform: translate(-50%, -50%);
+}
+
+.put-btn-date:focus {
+  border-color: #0769b7;
+  outline: 1px solid #0769b7;
+}
+
+/* 첨부파일 */
+.put-file {
+  line-height: 3.2rem;
+}
+
+.put-file::file-selector-button {
+  display: none;
+}
+
+/* form input 안내문 */
+p.input-notes {
+  padding: 3px 0 0 0;
+  font-size: var(--font-xs-size);
+  color: var(--color-gray-1);
+}
+
+/* 검색영역 폼 액션 버튼 */
+
+.search-form-action-btns .row {
+  border: none;
+}
+
+.search-form-action-btns button.btn-excel {
+  color: #fff;
+  border: 1px solid #1f8d51;
+  background: #1f8d51;
+  box-shadow: none;
+}
+
+.search-form-action-btns button.btn-excel:hover {
+  color: #fff;
+  border: 1px solid #aaa;
+  background: #aaa;
+}
+
+.search-form-action-btns button.btn-excel:focus,
+.search-form-action-btns button.btn-excel:active {
+  border: 1px solid #aaa;
+  background: #aaa;
+}
+
+/* input - form */
+.input-form {
+  position: relative;
+}
+
+.required-ment {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 13px);
+  padding-left: 1.2rem;
+  font-size: 1.4rem;
+  font-weight: 400;
+  letter-spacing: -0.42px;
+  color: #fc4646;
+}
+
+.required-ment::before {
+  content: '';
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  left: 0;
+  top: 50%;
+  border-radius: 50%;
+  background: #fc4646;
+  transform: translateY(-50%);
+}
+
+.input-form-rows .row {
+  border-bottom: 1px solid #d7d9d9;
+}
+
+.input-form .el-label:not(.align-items-center) {
+  padding-top: 9px;
+}
+
+.input-form .el-label > label {
+  position: relative;
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: -0.28px;
+  text-align: center;
+  color: #000;
+}
+
+.input-form .el-input {
+  padding: 0 2rem 0 1rem;
+}
+
+.input-form.type2 .el-input {
+  padding: 0 1rem;
+}
+
+.input-form p {
+  font-size: 1.5rem;
+  font-weight: 400;
+  letter-spacing: -0.45px;
+  color: #000;
+}
+
+.modal-sm .input-form {
+  background: #fff;
+  border-radius: 4px;
+  border: 1px solid #e2e4ed;
+}
+
+.modal-sm .input-form .input-form-rows .row:last-child {
+  border-bottom: 0;
+}
+
+/* file-info */
+.file-info {
+  width: 100%;
+  border: 1px solid #a7c4d5;
+  border-radius: 4px;
+}
+
+.file-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.3rem 1.7rem;
+}
+
+.file-list li {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.file-list li::before {
+  content: '';
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #000;
+}
+
+.file-list .file-name {
+  font-size: 1.6rem;
+}
+
+.file-list .btn-delete {
+  display: flex;
+  align-items: center;
+  height: 2.6rem;
+  gap: 5px;
+  padding: 0 8px;
+  font-size: 1.4rem;
+  font-weight: 400;
+  border: 1px solid #b3babf;
+  border-radius: 4px;
+  transition: 0.3s;
+}
+
+.file-list .btn-delete::before {
+  content: '';
+  width: 1rem;
+  height: 1rem;
+  background: url(../../images/icon/delete.png) center center no-repeat;
+  background-size: contain !important;
+}
+
+.file-list .btn-delete:hover {
+  color: #fff;
+  background: var(--color-gray);
+}
+
+.file-list .btn-delete:hover::before {
+  background: url(../../images/icon/delete-on.png) center center no-repeat;
+}
+
+.file-size {
+  display: flex;
+  justify-content: center;
+  padding: 7px 1rem 1rem;
+  font-size: 1.6rem;
+  color: #000;
+  border-top: 1px solid #a7c4d5;
+}
+
+.file-size .current-size {
+  padding: 0 7px;
+}
+
+/* 스위치버튼 */
+.form-switch {
+  position: relative;
+  display: inline-flex;
+}
+
+.form-switch input[type='checkbox'] {
+  position: absolute !important;
+  overflow: hidden !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+  clip: rect(0, 0, 0, 0) !important;
+}
+
+.form-switch input[type='checkbox'] ~ i {
+  display: inline-flex;
+  align-items: center;
+}
+
+.form-switch input[type='checkbox'] ~ i::before {
+  position: absolute;
+  width: 2rem;
+  height: 2rem;
+  left: 3px;
+  border-radius: 2rem;
+  background-color: #fff;
+  transition: all 0.3s;
+}
+
+.form-switch input[type='checkbox']:checked ~ i::before {
+  position: absolute;
+  left: calc(100% - 2.3rem);
+}
+
+.form-switch input[type='checkbox']:checked ~ i::after {
+  background-color: #76bdff;
+}
+.form-switch input[type='checkbox'] ~ i::after {
+  width: 5.6rem;
+  height: 2.8rem;
+  border-radius: 2.8rem;
+  background-color: #7e8790;
+}
+
+.form-switch input[type='checkbox'] ~ i::before,
+.form-switch input[type='checkbox'] ~ i::after {
+  content: '';
+  display: inline-flex;
+}
+
+.form-switch input[type='checkbox'] ~ label {
+  z-index: 1;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  padding-left: calc(100% - 3.2rem);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #cfdae4;
+  transition: 0.3s;
+}
+
+.form-switch input[type='checkbox']:checked ~ label {
+  padding-left: 5px;
+  color: #fff;
+}
+
+.put-between {
+  letter-spacing: -0.28px;
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: #000;
+}
+
+.radioBtn-wrap {
+  gap: 1.6rem;
+  padding: 1rem 9px;
+  border: 1px solid #afcbe6;
+  box-shadow: 3px 3px 10px 0px rgba(46, 89, 142, 0.1);
+}
+
+.radioBtn-wrap > span {
+  flex-grow: 1;
+  flex-basis: 0;
+}
+
+.radioBtn-wrap .put-radio + .radio-label {
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  padding: 8px 1rem 9px;
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: #6b757d;
+  background: #e8ebf1;
+  cursor: pointer;
+}
+
+.radioBtn-wrap .put-radio + .radio-label::before {
+  display: none;
+}
+
+.radioBtn-wrap .put-radio:checked + .radio-label {
+  color: #fff;
+  background: #379eec;
+  box-shadow: 1px 1px 2px 0px rgba(0, 0, 0, 0.1);
+}
+
+.radio-wrap .small-wrap {
+  display: flex;
+  gap: 1.3rem;
+  margin-left: -1rem;
+  padding: 6px 8px;
+  border-radius: 4px;
+  background: #dde4ea;
+}
+
+.radio-wrap .small-wrap .put-radio + .radio-label::before {
+  width: 24px;
+  height: 24px;
+}
+
+.birth-wrap input {
+  text-align: right;
+}

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+  "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+  "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+
+    <!-- 로그인페이지 -->
+    <definition name="loginLayout" template="/WEB-INF/view/user/login.jsp"/>
+
+    <!-- 기본 -->
+    <definition name="baseLayout" template="/WEB-INF/tiles/app/layout.jsp">
+        <put-attribute name="header" value="/WEB-INF/tiles/app/header.jsp" />
+        <put-attribute name="contents" value="" />
+        <put-attribute name="footer" value="/WEB-INF/tiles/app/footer.jsp" />
+    </definition>
+
+    <!--  3depth -->
+    <definition name="/*/*/*/*.tiles" extends="baseLayout">
+        <put-attribute name="contents" value="/WEB-INF/view/{1}/{2}/{3}/{4}.jsp" />
+    </definition>
+
+    <!--  2depth -->
+    <definition name="/*/*/*.tiles" extends="baseLayout">
+        <put-attribute name="contents" value="/WEB-INF/view/{1}/{2}/{3}.jsp" />
+    </definition>
+
+    <!--  1depth -->
+    <definition name="/*/*.tiles" extends="baseLayout">
+        <put-attribute name="contents" value="/WEB-INF/view/{1}/{2}.jsp" />
+    </definition>
+
+    <!--validator -->
+    <definition name="validator" template="/WEB-INF/view/cmmn/validator.jsp"/>
+
+</tiles-definitions>

@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.egov.template.services.common.menu.mapper.MenuMapper">
+    <select id="selectCmmnMenuList" parameterType="hashMap" resultType="org.egovframe.rte.psl.dataaccess.util.EgovMap">
+		SELECT
+		    R.MENU_ID as MENU_ID,
+            R.UP_MENU_ID as UP_MENU_ID,
+            R.MENU_NM as MENU_NM,
+            R.MENU_SEQ as MENU_SEQ,
+            R.MENU_URL as MENU_URL,
+            R.MENU_INDCT_YN as MENU_INDCT_YN,
+            R.LEVEL as LEVEL
+		FROM
+            (
+                select
+	                a.MENU_ID as MENU_ID,
+	                a.UP_MENU_ID as UP_MENU_ID,
+	                a.MENU_NM as MENU_NM,
+	                a.MENU_SEQ as MENU_SEQ,
+	                a.MENU_URL as MENU_URL,
+	                a.MENU_INDCT_YN as MENU_INDCT_YN,
+	                a.LEVEL as LEVEL
+                from
+	                (
+		                with recursive CTE
+		                as (
+		                	select
+				                TB_CM_MENU.MENU_ID as MENU_ID,
+				                TB_CM_MENU.UP_MENU_ID as UP_MENU_ID,
+				                TB_CM_MENU.MENU_NM as MENU_NM,
+				                TB_CM_MENU.MENU_SEQ as MENU_SEQ,
+				                TB_CM_MENU.MENU_URL as MENU_URL,
+				                TB_CM_MENU.MENU_INDCT_YN as MENU_INDCT_YN,
+				                '1' as LEVEL
+			                from
+			                	OPER.TB_CM_MENU
+			                where TB_CM_MENU.MENU_ID = 'MENU000000'
+			                and TB_CM_MENU.USE_YN = 'Y'
+			                union all
+			                select
+				                a.MENU_ID as MENU_ID,
+				                a.UP_MENU_ID as UP_MENU_ID,
+				                a.MENU_NM as MENU_NM,
+				                a.MENU_SEQ as MENU_SEQ,
+				                a.MENU_URL as MENU_URL,
+				                a.MENU_INDCT_YN as MENU_INDCT_YN,
+				                1 + b.LEVEL as LEVEL
+			                from
+			                	OPER.TB_CM_MENU a
+			                join cte b on a.UP_MENU_ID = b.MENU_ID and a.MENU_ID != 'MENU000000'
+			                where
+			                	a.USE_YN = 'Y'
+		                )
+		                select
+			                cte.MENU_ID as MENU_ID,
+			                cte.UP_MENU_ID as UP_MENU_ID,
+			                cte.MENU_NM as MENU_NM,
+			                cte.MENU_SEQ as MENU_SEQ,
+			                cte.MENU_URL as MENU_URL,
+			                cte.MENU_INDCT_YN as MENU_INDCT_YN,
+			                cte.LEVEL as LEVEL
+		                from
+		                	cte
+	                ) a
+                order by
+                a.MENU_SEQ
+            ) R
+		LEFT OUTER JOIN OPER.TB_CM_MENU_AUTHRT AUTH ON R.MENU_ID = AUTH.MENU_ID
+		WHERE AUTH.AUTHRT_CD = #{authrtCd}
+	</select>
+
+	<select id="selectCmmnMenuManageList" resultType="org.egovframe.rte.psl.dataaccess.util.EgovMap">
+		SELECT
+			A.MENU_ID
+			, A.UP_MENU_ID
+			, A.MENU_NM
+			, A.MENU_SEQ
+			, A.MENU_URL
+			, A.MENU_INDCT_YN
+			, A.USE_YN
+		    , GROUP_CONCAT(B.AUTHRT_CD ORDER BY B.AUTHRT_CD SEPARATOR ',') AS AUTHRT_CD
+		FROM OPER.TB_CM_MENU A
+		LEFT OUTER JOIN OPER.TB_CM_MENU_AUTHRT B ON A.MENU_ID = B.MENU_ID
+		WHERE A.USE_YN = 'Y'
+		AND A.MENU_ID NOT LIKE 'SVC%'
+		GROUP BY
+			A.MENU_ID
+		    ,A.UP_MENU_ID
+		    ,A.MENU_NM
+		    ,A.MENU_SEQ
+		    ,A.MENU_URL
+		    ,A.MENU_INDCT_YN
+		    ,A.USE_YN
+		ORDER BY A.MENU_SEQ
+	</select>
+
+	<select id="selectCmmnMenuId" resultType="string">
+        SELECT CONCAT('MENU', LPAD(COALESCE(MAX(CAST(SUBSTRING(MENU_ID, 5) AS UNSIGNED)), 0) + 1, 6, '0')) AS MENU_ID
+        FROM OPER.TB_CM_MENU
+	</select>
+
+	<select id="selectMenuInfoByUrl" parameterType="hashMap" resultType="hashMap">
+	    SELECT
+	    	CONCAT('[' ,MENU_ID, ']' ,MENU_URL, SPACE(1),'|' , SPACE(1), MENU_NM ) AS message
+	    FROM
+	        OPER.TB_CM_MENU
+	    WHERE
+	        MENU_URL = #{menuUrl}
+	    AND
+	        USE_YN = 'Y'
+	</select>
+
+	<select id="selectAuthMenuList" resultType="org.egovframe.rte.psl.dataaccess.util.EgovMap">
+		SELECT
+			REPLACE(A.AUTHRT_CD,'ROLE_','') AS AUTHRT_CD
+			, B.MENU_URL
+		FROM OPER.TB_CM_MENU_AUTHRT A
+		INNER JOIN OPER.TB_CM_MENU B ON A.MENU_ID = B.MENU_ID AND B.MENU_URL IS NOT NULL
+		WHERE A.USE_YN = 'Y'
+	</select>
+
+	<update id="deleteCmmnMenuList" parameterType="hashMap">
+		UPDATE OPER.TB_CM_MENU
+		   SET USE_YN = 'N'
+		 WHERE MENU_ID IN (
+		 	<foreach collection="menuList" item="item" index="index" separator=",">
+		 	#{item}
+		 	</foreach>
+		 )
+	</update>
+
+	<delete id="deleteCmmnAuthorRoleMapngManageList" parameterType="hashMap">
+
+	</delete>
+
+	<delete id="deleteCmmnRoleManageList" parameterType="hashMap">
+
+	</delete>
+
+	<insert id="processCmmnMenu" parameterType="hashMap">
+		INSERT INTO OPER.TB_CM_MENU(
+			MENU_ID
+			, UP_MENU_ID
+			, MENU_NM
+			, MENU_SEQ
+			, MENU_URL
+			, MENU_INDCT_YN
+			, USE_YN
+			, REG_DT
+			, RGTR_ID
+			, MDFCN_DT
+			, MDFR_ID
+		) VALUES (
+		     #{menuId}
+		    , #{upMenuId}
+		    , #{menuNm}
+		    , #{menuSn}
+		    , #{menuUrl}
+		    , #{menuIndctYn}
+		    , #{useYn}
+		    , NOW()
+		    , #{userId}
+		    , NOW()
+		    , #{userId}
+		) ON DUPLICATE KEY UPDATE
+			UP_MENU_ID       = #{upMenuId}
+		    , MENU_NM          = #{menuNm}
+		    , MENU_SEQ          = #{menuSn}
+		    , MENU_URL         = #{menuUrl}
+		    , MENU_INDCT_YN    = #{menuIndctYn}
+		    , USE_YN           = #{useYn}
+		    , MDFCN_DT         = NOW()
+		    , MDFR_ID         = #{userId}
+	</insert>
+
+	<insert id="processCmmnMenuAuthorCode" parameterType="hashMap">
+		INSERT INTO OPER.TB_CM_MENU_AUTHRT (
+			MENU_ID
+	        , AUTHRT_CD
+	        , USE_YN
+	        , REG_DT
+	        , RGTR_ID
+	        , MDFCN_DT
+	        , MDFR_ID
+		)
+		VALUES
+		<foreach collection="authorList" item="item" index="index" separator=",">
+	        (
+	            #{menuId}
+	            , #{item.authrtCd}
+	            , #{useYn}
+	            , NOW()
+	            , #{userId}
+	            , NOW()
+	            , #{userId}
+	        )
+		</foreach>
+		ON DUPLICATE KEY UPDATE
+			USE_YN = VALUES(USE_YN)
+			, MDFCN_DT = VALUES(MDFCN_DT)
+			, MDFR_ID = VALUES(MDFR_ID)
+	</insert>
+
+
+	<insert id="processCmmnMenuServiceAuthorCode" parameterType="hashMap">
+		INSERT INTO OPER.TB_CM_MENU_AUTHRT (
+			MENU_ID
+	        , AUTHRT_CD
+	        , USE_YN
+	        , REG_DT
+	        , RGTR_ID
+	        , MDFCN_DT
+	        , MDFR_ID
+		)
+		SELECT
+			MENU_ID
+			,	#{authrtCd}
+			,	'Y'
+            ,	NOW()
+            ,	#{userId}
+            ,	NOW()
+            ,	#{userId}
+		FROM
+			OPER.TB_CM_MENU
+		WHERE
+			USE_YN = 'Y'
+		AND
+			UP_MENU_ID = #{menuId}
+		ON DUPLICATE KEY UPDATE
+			USE_YN = VALUES(USE_YN)
+			, MDFCN_DT = VALUES(MDFCN_DT)
+			, MDFR_ID = VALUES(MDFR_ID)
+	</insert>
+
+	<insert id="processCmmnAuthorRoleMapngManage" parameterType="hashMap">
+	</insert>
+
+	<delete id="deleteCmmnMenuAuthorCode" parameterType="hashMap">
+		DELETE FROM TB_CM_MENU_AUTHRT
+		 WHERE MENU_ID = #{menuId}
+		   AND AUTHRT_CD NOT IN (
+		 	<foreach collection="authorList" item="item" index="index" separator=",">
+		 	#{item.authrtCd}
+		 	</foreach>
+		 )
+	</delete>
+
+</mapper>

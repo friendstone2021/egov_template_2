@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.egov.template.services.common.user.mapper.UserMapper">
+    <select id="selectUser" parameterType="com.egov.template.services.common.user.vo.TbCmUserVO"
+            resultType="com.egov.template.services.common.user.vo.TbCmUserVO">
+        SELECT USER_ID
+             , INST_CD
+             , DEPT_CD
+             , USER_ENPSWD
+             , USER_NM
+             , USER_TELNO
+             , EML_ADDR
+             , LGN_FAIL_NMTM
+             , LAST_CNTN_DT
+             , DEL_YN
+             , PSWD_CHG_DT
+             , USE_YN
+             , REG_DT
+             , RGTR_ID
+             , MDFCN_DT
+             , MDFR_ID
+        FROM OPER.TB_CM_USER
+        WHERE USER_ID = #{userId}
+    </select>
+
+    <insert id="insertUser" parameterType="com.egov.template.services.common.user.vo.TbCmUserVO">
+        insert into OPER.TB_CM_USER
+        (USER_ID, INST_CD, DEPT_CD, USER_ENPSWD, USER_NM, USER_TELNO, EML_ADDR, LGN_FAIL_NMTM,
+         LAST_CNTN_DT, DEL_YN, PSWD_CHG_DT, USE_YN, REG_DT, RGTR_ID, MDFCN_DT, MDFR_ID)
+        values (#{userId}, #{instCd}, #{deptCd}, #{userEnpswd}, #{userNm}, #{userTelno}, #{emlAddr}, #{lgnFailNmtm},
+                #{lastCntnDt}, #{delYn}, #{pswdChgDt}, #{useYn}, #{regDt}, #{rgtrId}, #{mdfcnDt}, #{mdfrId})
+    </insert>
+
+    <update id="updateUser" parameterType="com.egov.template.services.common.user.vo.TbCmUserVO">
+        UPDATE OPER.TB_CM_USER
+        <set>
+            <if test="instCd != null">INST_CD = #{instCd},</if>
+            <if test="deptCd != null">DEPT_CD = #{deptCd},</if>
+            <if test="userEnpswd != null and userEnpswd != ''">USER_ENPSWD = #{userEnpswd},</if>
+            <if test="userNm != null">USER_NM = #{userNm},</if>
+            <if test="userTelNo != null">USER_TELNO = #{userTelNo},</if>
+            <if test="emlAddr != null">EML_ADDR = #{emlAddr},</if>
+            <if test="lgnFailNmtm != null">LGN_FAIL_NMTM = #{lgnFailNmtm},</if>
+            <if test="lastCntnDt != null">LAST_CNTN_DT = #{lastCntnDt},</if>
+            <if test="delYn != null">DEL_YN = #{delYn},</if>
+            <if test="pswdChgDt != null">PSWD_CHG_DT = #{pswdChgDt},</if>
+            <if test="useYn != null">USE_YN = #{useYn},</if>
+            <if test="mdfcnDt != null">MDFCN_DT = #{mdfcnDt},</if>
+            <if test="mdfrId != null">MDFR_ID = #{mdfrId},</if>
+        </set>
+        WHERE USER_ID = #{userId}
+    </update>
+
+</mapper>

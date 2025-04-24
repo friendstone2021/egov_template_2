@@ -1,0 +1,257 @@
+/* Main Tab : 메인탭 */
+.maintab-wrap {
+  position: relative;
+  width: 100%;
+  border-bottom: 1px solid #d5d7dd;
+  margin-bottom: 7px;
+}
+
+.maintab {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  overflow: hidden;
+  width: 100%;
+  gap: 5px;
+  font-size: 0;
+}
+
+.maintab > li {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 0;
+  box-sizing: border-box;
+  -webkit-transition-property: color, border-color, background-color, box-shadow;
+  -webkit-transition-duration: 0.2s;
+  -webkit-transition-timing-function: ease-in-out;
+  transition-property: color, border-color, background-color, box-shadow;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+}
+
+.maintab > li a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20rem;
+  height: 3rem;
+  font-size: 1.9rem;
+  font-weight: 700;
+  text-align: center;
+  color: #6a6b70;
+  border-radius: 5px 5px 0 0;
+  background: #eaecf3;
+  -webkit-transition-property: color, border-color, background-color, box-shadow;
+  -webkit-transition-duration: 0.2s;
+  -webkit-transition-timing-function: ease-in-out;
+  transition-property: color, border-color, background-color, box-shadow;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+}
+
+.maintab > li.active a {
+  font-weight: 700;
+  color: #fff;
+  background: #0a2640;
+}
+
+.maintab > li.active:hover a,
+.maintab > li.active {
+  cursor: default;
+}
+
+.maintab:not(.subtab, .tab-indecate) > li:not(.active) a:hover {
+  background: #bbc1c5;
+}
+
+.tabcontents {
+  display: block;
+}
+
+.tabcontents .tabcon {
+  display: none;
+  font-size: 1.6rem;
+}
+
+.tabcontents > div.active {
+  display: block !important;
+}
+
+.subtab-wrap {
+  width: 100%;
+  border-bottom: 1px dashed #90badf;
+}
+
+.subtab {
+  position: relative;
+  justify-content: flex-start;
+  width: 100%;
+  gap: 5px;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.subtab li {
+  display: flex;
+  font-size: 0;
+  transition: none;
+}
+
+.subtab li a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 3rem;
+  font-size: 1.6rem;
+  font-weight: 500;
+  line-height: 1;
+  text-align: center;
+  color: #6a6b70;
+  border: 1px solid #d5d7dd;
+  border-radius: 2px;
+  background: transparent;
+  box-sizing: border-box;
+}
+
+.subtab > li:not(.active) a:hover {
+  background: #c8e7e6;
+}
+
+.subtab li.active a {
+  background: #fff;
+  font-weight: 700;
+  color: #008e8c;
+  border-color: #008e8c;
+}
+
+/* 인디케이트 탭  : 순차탭 */
+.tab-indecate {
+  display: inline-flex;
+  overflow: hidden;
+  width: 100%;
+  height: 51px;
+  font-size: 14px;
+  text-align: center;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  border-radius: 3px;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+.tab-indecate li {
+  position: relative;
+  display: flex;
+  flex-grow: 1;
+  height: 100%;
+  text-decoration: none;
+}
+
+.tab-indecate li:first-child {
+  padding-left: 0px;
+}
+
+.tab-indecate li:last-child {
+  padding-right: 0;
+}
+
+.tab-indecate li:last-child:after {
+  content: none;
+}
+
+.tab-indecate li:hover {
+  border: none;
+  background: #cbd8ed;
+}
+
+.tab-indecate li:hover {
+  border: none;
+}
+
+.tab-indecate > li.active:hover,
+.tab-indecate > li.active {
+  border: none;
+  background: #0d3472;
+}
+
+.tab-indecate li:after {
+  content: '';
+  z-index: 1;
+  position: absolute;
+  display: inline-block;
+  width: 48px;
+  height: 48px;
+  top: 0;
+  right: -24px;
+  background-color: #fff;
+  box-shadow: 1px -1px rgba(0, 0, 0, 0.25);
+  transition: background-color 0.2s ease-in-out;
+  transform: scale(0.707) rotate(45deg);
+}
+
+.tab-indecate li:hover::after {
+  background-color: #cbd8ed;
+}
+
+.tab-indecate li:focus::after,
+.tab-indecate li.active::after,
+.tab-indecate li.active:focus::after,
+.tab-indecate li.active:hover::after {
+  background-color: #0d3472;
+}
+
+.tab-indecate li a {
+  z-index: 20;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-grow: 1;
+  height: 100%;
+  margin: auto;
+
+  margin: auto;
+  padding-left: 20px;
+  padding-right: 0;
+  font-size: 1.6rem;
+  color: #666;
+  text-decoration: none;
+}
+
+.tab-indecate li.active a,
+.tab-indecate li.active a:hover {
+  font-size: 1.6rem;
+  color: #fff;
+  border: none;
+  background: none;
+}
+
+/* compact tab left align */
+.compact-tab {
+  display: inline-flex;
+  justify-content: flex-start;
+  width: auto;
+}
+
+.compact-tab li {
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: initial;
+}
+
+.compact-tab li a {
+  padding-left: 20px;
+  padding-right: 20px;
+  min-width: 16rem;
+}
+
+.tab-indecate.compact-tab li a {
+  padding-left: 36px;
+  padding-right: 24px;
+}

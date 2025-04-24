@@ -1,0 +1,437 @@
+/* element size :: Top continer size -1 px */
+@media screen and (max-width: 1023px) {
+  .row {
+    padding: 5px 0;
+  }
+
+  .m-column > .flex {
+    width: 100%;
+  }
+
+  .m-column {
+    -webkit-box-orient: vertical !important;
+    -webkit-box-direction: normal !important;
+    -ms-flex-flow: column !important;
+    flex-flow: column !important;
+  }
+
+  .m-row > .flex {
+    width: auto;
+  }
+
+  .m-row {
+    flex-wrap: wrap;
+    flex-shrink: 0;
+    flex-grow: 0;
+  }
+
+  .m-r-line {
+    border-right: 1px solid #dbe0e8;
+  }
+
+  .m-w100 {
+    width: 100% !important;
+  }
+
+  .m-w50 {
+    width: 50% !important;
+  }
+
+  .m-w33 {
+    width: 33.3333% !important;
+  }
+
+  .m-w25 {
+    width: 25% !important;
+  }
+
+  .m-p0 {
+    padding: 0 !important;
+  }
+
+  .m-mb5 {
+    margin-bottom: 5px !important;
+  }
+
+  .m-m0 {
+    margin: 0 !important;
+  }
+
+  .m-d-none {
+    display: none !important;
+  }
+}
+
+/* grid list */
+@media screen and (max-width: 1023px) {
+  .grid-list-a tbody tr {
+    padding: 5px 0;
+  }
+
+  .grid-list-a thead th {
+    padding: 8px 4px;
+    font-size: 1.5rem;
+  }
+
+  .grid-list-a tbody tr td {
+    padding: 4px 10px;
+    font-size: 1.5rem;
+  }
+}
+
+/* Grid list Over size  */
+@media screen and (max-width: 1023px) {
+  .gird-oversize-alert {
+    position: relative;
+    display: flex;
+
+    width: 100%;
+    margin: 10px 0;
+    padding: 3px 0;
+
+    flex-grow: 1;
+    flex-shrink: 1;
+
+    border-radius: 4px;
+    border: 1px solid #dbe0e8;
+  }
+
+  .oversize-alert-message {
+    display: inline-block;
+    text-align: left;
+    margin: 0;
+    padding: 0;
+  }
+
+  .oversize-alert-message > span {
+    position: relative;
+    text-align: left;
+    font-size: 1.35rem;
+    line-height: 1.2;
+    color: #516992;
+    padding-bottom: 5px;
+  }
+
+  .icon-touch {
+    display: inline-block;
+    width: 25px;
+    height: 10px;
+    text-align: left;
+    text-indent: -9999px;
+    overflow: hidden;
+    background: url(../../img/icon/icon-grid-touch.png) center center no-repeat;
+  }
+}
+
+/* mobile grid list */
+@media screen and (max-width: 1023px) {
+  .m-grid-list {
+    display: block;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+
+  .m-grid-list table {
+    table-layout: auto;
+    overflow: hidden;
+    box-shadow: none;
+    display: flex;
+  }
+
+  .m-grid-list table thead {
+    display: none;
+  }
+
+  .m-grid-list table tbody,
+  .m-grid-list table tbody tr,
+  .m-grid-list table tbody td {
+    display: flex;
+
+    flex-direction: column;
+    flex-wrap: wrap;
+
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%;
+    text-align: left;
+    padding: 0;
+    flex-shrink: 0;
+    flex-grow: 0;
+  }
+
+  .m-grid-list table tbody tr {
+    flex-direction: column;
+  }
+
+  .m-grid-list table tbody tr:hover td {
+    background: #fff;
+  }
+
+  .m-grid-list table tbody tr td {
+    z-index: 1;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    height: auto;
+    border: 0;
+    justify-content: flex-start;
+    align-items: center;
+    background: #fff;
+    width: 100%;
+    padding-right: 12px;
+  }
+
+  .m-grid-list table tbody tr td::before {
+    z-index: 0;
+    content: attr(data-header);
+    position: relative;
+    left: 0;
+    top: 0;
+    display: flex;
+    text-align: left;
+    width: 30%;
+    margin-right: 12px;
+    padding: 10px 8px;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #323336;
+    background: #eef4fa;
+  }
+
+  .m-grid-list table tbody tr td::after {
+    content: '';
+    z-index: 1;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    background: #bad1ea;
+  }
+
+  .m-grid-list table tbody tr td label.chkbox,
+  .m-grid-list table tbody tr td label.radiobox {
+    height: inherit !important;
+  }
+
+  .m-grid-list table tbody tr td input.flex {
+    flex-grow: 0;
+    flex-shrink: 0;
+    width: auto;
+    width: calc(100% - 30% - 28px);
+  }
+}
+
+/* board-view-basic Mobile 1024 이하 */
+
+@media screen and (max-width: 1023px) {
+  /* board top right button group */
+  .board-info .board-btngroup {
+    position: relative;
+    left: 0;
+    top: 0;
+    right: inherit;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 100%;
+    text-align: right;
+  }
+
+  .board-view-basic thead tr th,
+  .board-view-basic thead tr td,
+  .board-view-basic tbody tr th,
+  .board-view-basic tbody tr td {
+    font-size: 1.6rem;
+  }
+}
+
+/* board gird list Mobile 1024 이하 */
+@media screen and (max-width: 1023px) {
+  /* board top left info  */
+  .board-info > p {
+    width: 100%;
+  }
+}
+
+/* Mobile 768 이하 */
+@media screen and (max-width: 1023px) {
+  .pagination a {
+    font-size: 1.4rem;
+    padding: 8px 10px;
+    line-height: 1;
+  }
+
+  .pagination a.btn-page {
+    padding: 8px 10px;
+    line-height: 1;
+    font-size: 1.4rem;
+  }
+}
+
+.pagination a.btn-page:hover {
+  background: #cde1ff;
+  border: 1px solid #cde1ff;
+}
+
+/* Title Mobile 1024 이하 */
+@media screen and (max-width: 1023px) {
+  /* Components : 01. Title H1 ~ H6, H1 subtxt ~ H6 sub txt */
+  h1.title-lv1 {
+    font-size: calc(var(--mobile-font-size) * 1.75);
+  }
+
+  h1.title-lv1 .subtxt {
+    font-size: var(--mobile-font-size);
+  }
+
+  h2.title-lv2 {
+    font-size: calc(var(--mobile-font-size) * 1.4);
+  }
+
+  h2.title-lv2 .subtxt {
+    font-size: var(--mobile-font-size);
+  }
+
+  h3.title-lv3 {
+    font-size: calc(var(--mobile-font-size) * 1.23);
+    padding: 0 0 0 16px;
+    background: url(../../img/h3.gif) no-repeat 5px 8px;
+  }
+
+  h3.title-lv3 .subtxt {
+    font-size: calc(var(--mobile-font-size) * 0.92);
+  }
+
+  h4.title-lv4 {
+    font-size: var(--mobile-font-size);
+    padding: 0 0 5px 16px;
+  }
+
+  h4.title-lv4 .subtxt {
+    color: #54565b;
+    font-size: calc(var(--mobile-font-size) * 0.85);
+  }
+
+  h5.title-lv5 {
+    font-size: calc(var(--mobile-font-size) * 0.85);
+    padding: 0 0 5px 16px;
+  }
+
+  h5.title-lv5 .subtxt {
+    font-size: calc(var(--mobile-font-size) * 0.75);
+  }
+
+  h6.title-lv6 {
+    font-size: calc(var(--mobile-font-size) * 0.75);
+    padding: 0 0 5px 16px;
+  }
+
+  h6.title-lv6 .subtxt {
+    font-size: calc(var(--mobile-font-size) * 0.63);
+  }
+}
+
+/* Modal wrap Mobile 1024 이하 */
+@media screen and (max-width: 1023px) {
+  .layerpop-container {
+    width: 94%;
+    left: 3%;
+    padding: 10px 0 10px;
+  }
+
+  .modal-sm .layerpop-container {
+    width: 94%;
+    left: 3%;
+  }
+
+  .modal-lg .layerpop-container {
+    width: 94%;
+    left: 3%;
+  }
+
+  .modal-xl .layerpop-container {
+    width: 94%;
+    left: 3%;
+  }
+}
+
+/* Search form css */
+@media screen and (max-width: 1023px) {
+  .search-form-rows button.btn {
+    padding: 2px 3px;
+  }
+}
+
+/* thumnail list */
+
+@media screen and (max-width: 1023px) {
+  .board-wrap ul.thumnail-list.m-item1 li {
+    width: 100%;
+  }
+
+  .board-wrap ul.thumnail-list.m-item2 li {
+    width: calc(50% - 10px);
+  }
+
+  .board-wrap ul.thumnail-list.m-item3 li {
+    width: calc(33.3333% - 10px);
+  }
+
+  .board-wrap ul.thumnail-list.m-item4 li {
+    width: calc(25% - 10px);
+  }
+
+  .board-wrap ul.thumnail-list li .detail-box .title {
+    font-size: 1.6rem;
+    line-height: 2rem;
+  }
+
+  .board-wrap ul.thumnail-list li .detail-box .info .date {
+    float: none;
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 3px 0;
+  }
+
+  .board-wrap ul.thumnail-list li .detail-box .info .writer {
+    float: none;
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 3px 0;
+  }
+
+  .board-wrap ul.thumnail-list li .detail-box .info .team {
+    display: block;
+    width: 100%;
+    font-size: 1.4rem;
+    color: #373c41;
+    text-align: center;
+    padding: 5px 0;
+    margin-bottom: 3px;
+    border-top: 1px solid #f1f1f1;
+    border-bottom: 1px solid #f1f1f1;
+  }
+}
+
+/* mobile flex gap */
+/* Tablet Over size  */
+@media screen and (max-width: 1024px) {
+  .m-gap0 {
+    gap: 0;
+  }
+}
+
+/* mobile - header */
+@media screen and (max-width: 768px) {
+}
+
+/* mobile - Lnb */
+@media screen and (max-width: 1024px) {
+}
+
+/* 로그인 / 회원가입 */
+@media screen and (max-width: 1440px) {
+}
