@@ -31,21 +31,22 @@ spring:
       max-request-size: 50MB
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    driver-class-name: org.mariadb.jdbc.Driver
+    driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://118.220.143.137:15432/anisos
     username: anisos_oper
     password: anisos_oper
     hikari:
+      connection-init-sql: SET search_path TO oper
       maximum-pool-size: 10
   jpa:
-    database-platform: org.hibernate.dialect.MariaDB103Dialect
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
     properties:
       hibernate:
         format_sql: true
         show_sql: true
-    generate-ddl: true
+    generate-ddl: false
     defer-datasource-initialization: true
     show-sql: true
 

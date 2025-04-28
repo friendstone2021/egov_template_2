@@ -12,7 +12,7 @@
              , RGTR_ID
              , MDFCN_DT
              , MDFR_ID
-        FROM OPER.TB_CM_FILE_GROUP
+        FROM TB_CM_FILE_GROUP
         WHERE FILE_GROUP_ID = #{fileGroupId}
         <if test="fileAcsAuthrtCd != null and fileAcsAuthrtCd != ''">
             AND FILE_ACS_AUTHRT_CD = #{fileAcsAuthrtCd}
@@ -46,7 +46,7 @@
              , RGTR_ID
              , MDFCN_DT
              , MDFR_ID
-        FROM OPER.TB_CM_FILE_DTL
+        FROM TB_CM_FILE_DTL
         WHERE FILE_GROUP_ID = #{fileGroupId}
         AND FILE_ID = #{fileId}
         <if test="filePathNm != null and filePathNm != ''">
@@ -81,7 +81,7 @@
              , RGTR_ID
              , MDFCN_DT
              , MDFR_ID
-        FROM OPER.TB_CM_FILE_DTL
+        FROM TB_CM_FILE_DTL
         WHERE FILE_GROUP_ID = #{fileGroupId}
         <if test="fileId != null and fileId != ''">
             AND FILE_ID = #{fileId}
@@ -106,7 +106,7 @@
     </select>
 
     <insert id="insertFileGrp" parameterType="com.egov.template.services.common.file.vo.TbCmFileGroupVO">
-        INSERT INTO OPER.TB_CM_FILE_GROUP (
+        INSERT INTO TB_CM_FILE_GROUP (
             FILE_GROUP_ID
             , FILE_ACS_AUTHRT_CD
             , FILE_MDFCN_AUTHRT_CD
@@ -132,7 +132,7 @@
     </insert>
 
     <update id="updateFileGrp" parameterType="com.egov.template.services.common.file.vo.TbCmFileGroupVO">
-        UPDATE OPER.TB_CM_FILE_GROUP
+        UPDATE TB_CM_FILE_GROUP
         SET MDFCN_DT = NOW()
           , MDFR_ID = #{mdfrId}
             <if test="fileAcsAuthrtCd != null and fileAcsAuthrtCd != ''">
@@ -151,7 +151,7 @@
     </update>
 
     <insert id="insertFileDtl" parameterType="com.egov.template.services.common.file.vo.TbCmFileDtlVO">
-        INSERT INTO OPER.TB_CM_FILE_DTL (
+        INSERT INTO TB_CM_FILE_DTL (
             FILE_GROUP_ID
             , FILE_ID
             , FILE_PATH_NM
@@ -183,7 +183,7 @@
     </insert>
 
     <update id="updateFileDtl" parameterType="com.egov.template.services.common.file.vo.TbCmFileDtlVO">
-        UPDATE OPER.TB_CM_FILE_DTL
+        UPDATE TB_CM_FILE_DTL
         SET MDFCN_DT = NOW()
           , MDFR_ID = #{mdfrId}
             <if test="filePathNm != null and filePathNm != ''">

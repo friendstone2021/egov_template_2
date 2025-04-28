@@ -33,7 +33,7 @@
 				                TB_CM_MENU.MENU_INDCT_YN as MENU_INDCT_YN,
 				                '1' as LEVEL
 			                from
-			                	OPER.TB_CM_MENU
+			                	TB_CM_MENU
 			                where TB_CM_MENU.MENU_ID = 'MENU000000'
 			                and TB_CM_MENU.USE_YN = 'Y'
 			                union all
@@ -46,7 +46,7 @@
 				                a.MENU_INDCT_YN as MENU_INDCT_YN,
 				                1 + b.LEVEL as LEVEL
 			                from
-			                	OPER.TB_CM_MENU a
+			                	TB_CM_MENU a
 			                join cte b on a.UP_MENU_ID = b.MENU_ID and a.MENU_ID != 'MENU000000'
 			                where
 			                	a.USE_YN = 'Y'
@@ -65,7 +65,7 @@
                 order by
                 a.MENU_SEQ
             ) R
-		LEFT OUTER JOIN OPER.TB_CM_MENU_AUTHRT AUTH ON R.MENU_ID = AUTH.MENU_ID
+		LEFT OUTER JOIN TB_CM_MENU_AUTHRT AUTH ON R.MENU_ID = AUTH.MENU_ID
 		WHERE AUTH.AUTHRT_CD = #{authrtCd}
 	</select>
 
@@ -79,8 +79,8 @@
 			, A.MENU_INDCT_YN
 			, A.USE_YN
 		    , GROUP_CONCAT(B.AUTHRT_CD ORDER BY B.AUTHRT_CD SEPARATOR ',') AS AUTHRT_CD
-		FROM OPER.TB_CM_MENU A
-		LEFT OUTER JOIN OPER.TB_CM_MENU_AUTHRT B ON A.MENU_ID = B.MENU_ID
+		FROM TB_CM_MENU A
+		LEFT OUTER JOIN TB_CM_MENU_AUTHRT B ON A.MENU_ID = B.MENU_ID
 		WHERE A.USE_YN = 'Y'
 		AND A.MENU_ID NOT LIKE 'SVC%'
 		GROUP BY
@@ -96,14 +96,14 @@
 
 	<select id="selectCmmnMenuId" resultType="string">
         SELECT CONCAT('MENU', LPAD(COALESCE(MAX(CAST(SUBSTRING(MENU_ID, 5) AS UNSIGNED)), 0) + 1, 6, '0')) AS MENU_ID
-        FROM OPER.TB_CM_MENU
+        FROM TB_CM_MENU
 	</select>
 
 	<select id="selectMenuInfoByUrl" parameterType="hashMap" resultType="hashMap">
 	    SELECT
 	    	CONCAT('[' ,MENU_ID, ']' ,MENU_URL, SPACE(1),'|' , SPACE(1), MENU_NM ) AS message
 	    FROM
-	        OPER.TB_CM_MENU
+	        TB_CM_MENU
 	    WHERE
 	        MENU_URL = #{menuUrl}
 	    AND
@@ -114,13 +114,13 @@
 		SELECT
 			REPLACE(A.AUTHRT_CD,'ROLE_','') AS AUTHRT_CD
 			, B.MENU_URL
-		FROM OPER.TB_CM_MENU_AUTHRT A
-		INNER JOIN OPER.TB_CM_MENU B ON A.MENU_ID = B.MENU_ID AND B.MENU_URL IS NOT NULL
+		FROM TB_CM_MENU_AUTHRT A
+		INNER JOIN TB_CM_MENU B ON A.MENU_ID = B.MENU_ID AND B.MENU_URL IS NOT NULL
 		WHERE A.USE_YN = 'Y'
 	</select>
 
 	<update id="deleteCmmnMenuList" parameterType="hashMap">
-		UPDATE OPER.TB_CM_MENU
+		UPDATE TB_CM_MENU
 		   SET USE_YN = 'N'
 		 WHERE MENU_ID IN (
 		 	<foreach collection="menuList" item="item" index="index" separator=",">
@@ -138,7 +138,7 @@
 	</delete>
 
 	<insert id="processCmmnMenu" parameterType="hashMap">
-		INSERT INTO OPER.TB_CM_MENU(
+		INSERT INTO TB_CM_MENU(
 			MENU_ID
 			, UP_MENU_ID
 			, MENU_NM
@@ -174,7 +174,7 @@
 	</insert>
 
 	<insert id="processCmmnMenuAuthorCode" parameterType="hashMap">
-		INSERT INTO OPER.TB_CM_MENU_AUTHRT (
+		INSERT INTO TB_CM_MENU_AUTHRT (
 			MENU_ID
 	        , AUTHRT_CD
 	        , USE_YN
@@ -203,7 +203,7 @@
 
 
 	<insert id="processCmmnMenuServiceAuthorCode" parameterType="hashMap">
-		INSERT INTO OPER.TB_CM_MENU_AUTHRT (
+		INSERT INTO TB_CM_MENU_AUTHRT (
 			MENU_ID
 	        , AUTHRT_CD
 	        , USE_YN
@@ -221,7 +221,7 @@
             ,	NOW()
             ,	#{userId}
 		FROM
-			OPER.TB_CM_MENU
+			TB_CM_MENU
 		WHERE
 			USE_YN = 'Y'
 		AND

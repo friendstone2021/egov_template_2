@@ -84,7 +84,7 @@
 					alert(result.message);
 					if(result.status == 'SUCCESS'){
 						idchk = true;
-						$("#userEnpswd").focus();
+						$("#enpswd").focus();
 					} else {
 						idchk = false;
 					}
@@ -118,19 +118,19 @@
 		            return;
 		        }
 
-				if($('#userEnpswd').val() == ''){
+				if($('#enpswd').val() == ''){
 					alert('비밀번호는 필수 입력값입니다.');
-					$('#userEnpswd').focus();
+					$('#enpswd').focus();
 					return false;
 				}
 
 				//비밀번호&재입력 동일한지
-				if($("#userEnpswd").val() !== $("#reuserEnpswd").val()){
-					$("#reuserEnpswd").focus();
+				if($("#enpswd").val() !== $("#reenpswd").val()){
+					$("#reenpswd").focus();
 					alert('비밀번호가 일치하지 않습니다. 다시 입력해주세요.');
 					return false;
 				}
-				var data =$('#userEnpswd').val();
+				var data =$('#enpswd').val();
 				var passwordRegex = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{9,20}$/
 
 				if(passwordRegex.test(data)){
@@ -156,17 +156,17 @@
 				        }
 				        if (cnt > 0 || cnt2 > 0) {
 							alert('연속된 문자를 3개 이상 사용하실 수 없습니다.\n(ex: 123, 321, abc, cba 포함 불가) ');
-							$('#userEnpswd').focus();
+							$('#enpswd').focus();
 							return false;
 				        }
 				    } else {
 						alert('같은 문자를 3개 이상 사용할 수 없습니다.');
-						$('#userEnpswd').focus();
+						$('#enpswd').focus();
 						return false;
 				    }
 				}else{
 					alert('비밀번호는 최소 9자에서 20자까지, 영문자, 숫자 및 특수 문자를 포함해야 합니다.');
-					$('#userEnpswd').focus();
+					$('#enpswd').focus();
 					return false;
 				}
 
@@ -184,15 +184,15 @@
 				if(valid){
 
 					//비밀번호&재입력 동일한지
-					if($("#userEnpswd").val() !== $("#reuserEnpswd").val()){
-						$("#reuserEnpswd").focus();
+					if($("#enpswd").val() !== $("#reenpswd").val()){
+						$("#reenpswd").focus();
 							alert('비밀번호가 일치하지 않습니다. 다시 입력해주세요.');
 						return false;
 					}
 
 					//
-					if(!cm.fnCttcValid($(document.joinForm).find("[name='userTelNo']").val())){
-						$(document.frm).find("[name='userTelNo']").focus();
+					if(!cm.fnCttcValid($(document.joinForm).find("[name='mblTelno']").val())){
+						$(document.frm).find("[name='mblTelno']").focus();
 						alert('올바른 연락처를 입력해주세요.');
 						return false;
 					}
@@ -287,20 +287,20 @@
 						</div>
 					</div>
 					<div class="form-control">
-						<label for="userEnpswd">비밀번호</label>
-						<input type="password" id="userEnpswd" name="userEnpswd" placeholder="비밀번호를 입력하세요." title="비밀번호" maxlength="20" required="required"/>
+						<label for="enpswd">비밀번호</label>
+						<input type="password" id="enpswd" name="enpswd" placeholder="비밀번호를 입력하세요." title="비밀번호" maxlength="20" required="required"/>
 					</div>
 					<div class="form-control">
-						<label for="reuserEnpswd">비밀번호 재입력</label>
-						<input type="password" id="reuserEnpswd" placeholder="비밀번호를 재입력하세요." title="비밀번호 재입력" maxlength="20" required="required"/>
+						<label for="reenpswd">비밀번호 재입력</label>
+						<input type="password" id="reenpswd" placeholder="비밀번호를 재입력하세요." title="비밀번호 재입력" maxlength="20" required="required"/>
 					</div>
 					<div class="form-control">
 						<label for="userNm">이름</label>
 						<input type="text" id="userNm" name="userNm" placeholder="이름을 입력하세요." title="이름" maxlength="10" required="required"/>
 					</div>
 					<div class="form-control">
-						<label for="userTelNo">연락처</label>
-						<input type="text" id="userTelNo" name="userTelNo" placeholder="연락처를 입력하세요." title="연락처" maxlength="11" class="number" required="required"/>
+						<label for="mblTelno">연락처</label>
+						<input type="text" id="mblTelno" name="mblTelno" placeholder="연락처를 입력하세요." title="연락처" maxlength="11" class="number" required="required"/>
 					</div>
 					<div class="form-control">
 						<label for="emlAddr">이메일</label>

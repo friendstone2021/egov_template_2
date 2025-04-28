@@ -55,7 +55,7 @@ public class TbCmUserVO extends SystemProperty {
     /**
      * 비밀번호
      */
-    private String userEnpswd;
+    private String enpswd;
 
     /**
      * 사용자이름
@@ -65,7 +65,7 @@ public class TbCmUserVO extends SystemProperty {
     /**
      * 연락처
      */
-    private String userTelno;
+    private String mblTelno;
 
     /**
      * 이메일
@@ -91,6 +91,6 @@ public class TbCmUserVO extends SystemProperty {
     /**
      * 비밀번호변경일시
      */
-    private String pswdChgDt;
+    private Date pswdChgDt;
 
 }

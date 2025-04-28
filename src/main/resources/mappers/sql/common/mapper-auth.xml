@@ -4,7 +4,7 @@
 
     <!-- CREATE: 권한 정보 등록 -->
     <insert id="insertAuth" parameterType="com.egov.template.services.common.auth.vo.TbCmAuthrtVO">
-        INSERT INTO OPER.TB_CM_AUTHRT (AUTHRT_CD,
+        INSERT INTO TB_CM_AUTHRT (AUTHRT_CD,
                                 AUTHRT_NM,
                                 USE_YN,
                                 REG_DT,
@@ -27,7 +27,7 @@
         RGTR_ID,
         MDFCN_DT,
         MDFR_ID
-        FROM OPER.TB_CM_AUTHRT
+        FROM TB_CM_AUTHRT
         <where>
             <if test="authrtCd != null and authrtCd != ''">
                 AND AUTHRT_CD = #{authrtCd}
@@ -51,13 +51,13 @@
                RGTR_ID,
                MDFCN_DT,
                MDFR_ID
-        FROM OPER.TB_CM_AUTHRT
+        FROM TB_CM_AUTHRT
         WHERE AUTHRT_CD = #{authrtCd}
     </select>
 
     <!-- UPDATE: 권한 정보 수정 (파라미터가 존재할 경우만 업데이트) -->
     <update id="updateAuth" parameterType="com.egov.template.services.common.auth.vo.TbCmAuthrtVO">
-        UPDATE OPER.TB_CM_AUTHRT
+        UPDATE TB_CM_AUTHRT
         <set>
             <if test="authrtNm != null">AUTHRT_NM = #{authrtNm},</if>
             <if test="useYn != null">USE_YN = #{useYn},</if>
@@ -70,13 +70,13 @@
     <!-- DELETE: 권한 정보 삭제 -->
     <delete id="deleteAuth" parameterType="string">
         DELETE
-        FROM OPER.TB_CM_AUTHRT
+        FROM TB_CM_AUTHRT
         WHERE AUTHRT_CD = #{authrtCd}
     </delete>
 
     <!-- 논리적 삭제: 사용 여부만 변경 -->
     <update id="deactivateAuth" parameterType="map">
-        UPDATE OPER.TB_CM_AUTHRT
+        UPDATE TB_CM_AUTHRT
         SET USE_YN   = 'N',
             MDFCN_DT = NOW(),
             MDFR_ID  = #{mdfrId}
@@ -86,25 +86,25 @@
     <!-- 권한 존재 여부 확인 -->
     <select id="countAuth" parameterType="string" resultType="int">
         SELECT COUNT(*)
-        FROM OPER.TB_CM_AUTHRT
+        FROM TB_CM_AUTHRT
         WHERE AUTHRT_CD = #{authrtCd}
     </select>
 
     <!-- 권한 코드 중복 확인 -->
     <select id="checkAuthrtCdDuplicate" parameterType="string" resultType="int">
         SELECT COUNT(*)
-        FROM OPER.TB_CM_AUTHRT
+        FROM TB_CM_AUTHRT
         WHERE AUTHRT_CD = #{authrtCd}
     </select>
 
     <select id="selectUserAuthList" parameterType="string" resultType="string">
         SELECT AUTHRT_CD
-        FROM OPER.tb_cm_user_authrt
+        FROM tb_cm_user_authrt
         WHERE USER_ID = #{userId}
     </select>
 
     <insert id="insertUserAuth" parameterType="com.egov.template.services.common.auth.vo.TbCmUserAuthrtVO">
-        INSERT INTO OPER.tb_cm_user_authrt
+        INSERT INTO tb_cm_user_authrt
             (USER_ID, AUTHRT_CD, USE_YN, REG_DT, RGTR_ID)
         VALUES (#{userId}, #{authrtCd}, #{useYn}, #{regDt}, #{rgtrId})
     </insert>

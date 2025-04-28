@@ -65,7 +65,7 @@ public class CustomAuthenticationManager implements AuthenticationManager {
         userIdParam.setUserId(username);
         TbCmUserVO cmTbUser = userMapper.selectUser(userIdParam);
         if (cmTbUser != null) {
-            if (!password.equals(cmTbUser.getUserEnpswd())) {
+            if (!password.equals(cmTbUser.getEnpswd())) {
                 throw new BadCredentialsException("invalidIdPass");
             } else {
                 cmTbUser.setLastCntnDt(new Date());
@@ -83,7 +83,7 @@ public class CustomAuthenticationManager implements AuthenticationManager {
                             .roles(arrUserAuth)
                             .build();
 
-                    cmTbUser.setUserEnpswd(null);
+                    cmTbUser.setEnpswd(null);
 
                     authToken = new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());
                     authToken.setDetails(cmTbUser);
